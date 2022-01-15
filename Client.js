@@ -50,10 +50,7 @@ module.exports = class Client extends Events {
         if (RESERVED_EVENTS.has(ev)) {
             throw new Error(`"${ev}" is a reserved event name`);
         }
-        const data = {
-            ev: ev,
-            args : [...args]
-        }
+        const data = {ev, args}
         this.client.write(JSON.stringify(data) + '⋠');
         return true;
     }
