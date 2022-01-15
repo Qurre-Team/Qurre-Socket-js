@@ -1,0 +1,24 @@
+{
+  "name": "qurre-socket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Qurre.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Qurre-Team/Qurre-Socket-js.git"
+  },
+  "keywords": [
+    "Qurre",
+    "Socket",
+    "Qurre Socket"
+  ],
+  "author": "Qurre Team",
+  "license": "Apache License 2.0",
+  "bugs": {
+    "url": "https://github.com/Qurre-Team/Qurre-Socket-js/issues"
+  },
+  "homepage": "https://qurre.store"
+}
