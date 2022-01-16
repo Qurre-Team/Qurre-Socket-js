@@ -13,6 +13,7 @@ module.exports = class Server extends Events {
      */
     constructor (port = 0, host = '127.0.0.1') {
         super();
+        if(host == null || host == undefined || host.toLowerCase() == 'localhost') host = '127.0.0.1';
         this.host = host;
         this.port = port;
         this.clients = [];

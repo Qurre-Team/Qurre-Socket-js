@@ -19,6 +19,7 @@ module.exports = class Socket extends Events {
                 try{
                     const array = JSON.parse(dojson);
                     if (RESERVED_EVENTS.has(array.ev)) return;
+                    if (array.args == null || array.args == undefined) array.args = [];
                     ths.emitReserved(array.ev, array.args);
                 }catch{}
             });
