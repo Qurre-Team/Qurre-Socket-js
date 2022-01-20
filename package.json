@@ -1,6 +1,6 @@
 {
   "name": "qurre-socket",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "Qurre.js",
   "scripts": {
@@ -20,5 +20,5 @@
   "bugs": {
     "url": "https://github.com/Qurre-Team/Qurre-Socket-js/issues"
   },
-  "homepage": "https://qurre.store"
+  "homepage": "https://github.com/Qurre-Team"
 }

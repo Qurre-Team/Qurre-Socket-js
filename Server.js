@@ -18,6 +18,7 @@ module.exports = class Server extends Events {
         this.port = port;
         this.clients = [];
         this.initialized = false;
+        this.server = {};
     }
     async initialize(){
         if(this.initialized) return;
@@ -33,7 +34,11 @@ module.exports = class Server extends Events {
             return new Promise(resolve => server.listen(ths.port, ths.host, () => resolve()));
         }
         this.port = server.address().port;
+        this.server = server;
         const guid = function(){return 'xxxxxxyxxxxxx4xxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0,v=c=='x'?r:r&0x3|0x8;return v.toString(16);});}
+    }
+    destroy(){
+        this.server.close();
     }
     emit(ev, ...args) {
         for (let i = 0; i < this.clients.length; i++) {
