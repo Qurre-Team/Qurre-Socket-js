@@ -42,10 +42,8 @@ module.exports = class Client extends Events {
                 });
             });
             client.on('close', () => ths.emitReserved('disconnect'));
-            client.on('error', () => {});
-            client.connect(port, host, function() {
-                ths.emitReserved('connect');
-            });
+            client.on('error', () => ths.emitReserved('disconnect'));
+            client.connect(port, host, () => ths.emitReserved('connect'));
         }
     }
     emit(ev, ...args) {
