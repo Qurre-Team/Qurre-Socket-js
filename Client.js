@@ -22,6 +22,7 @@ module.exports = class Client extends Events {
         super();
         if(host == null || host == undefined || host.toLowerCase() == 'localhost') host = '127.0.0.1';
         const client = new net.Socket();
+        this.connected = false;
         const ths = this;
         Connect();
         setInterval(() => {
@@ -41,9 +42,18 @@ module.exports = class Client extends Events {
                     }catch{}
                 });
             });
-            client.on('close', () => ths.emitReserved('disconnect'));
-            client.on('error', () => ths.emitReserved('disconnect'));
-            client.connect(port, host, () => ths.emitReserved('connect'));
+            client.on('close', () => {
+                ths.connected = false;
+                ths.emitReserved('disconnect');
+            });
+            client.on('error', () => {
+                ths.connected = false;
+                ths.emitReserved('disconnect');
+            });
+            client.connect(port, host, () => {
+                ths.connected = true;
+                ths.emitReserved('connect');
+            });
         }
     }
     emit(ev, ...args) {
