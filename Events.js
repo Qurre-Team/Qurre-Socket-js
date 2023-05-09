@@ -1,4 +1,5 @@
-const events = require("events");
+const events = require('events');
+
 module.exports = class StrictEventEmitter extends events.EventEmitter {
     /**
      * Adds the `listener` function as an event listener for `ev`.

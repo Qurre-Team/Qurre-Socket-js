@@ -1,5 +1,6 @@
 const net = require('net');
-const Events = require("./Events");
+const Events = require('./Events');
+
 const RESERVED_EVENTS = new Set([
     'connect',
     'connect_error',
@@ -8,6 +9,7 @@ const RESERVED_EVENTS = new Set([
     'newListener',
     'removeListener',
 ]);
+
 /**
  * @class Socket client
  */
@@ -23,10 +25,11 @@ module.exports = class Client extends Events {
         if(host == null || host == undefined || host.toLowerCase() == 'localhost') host = '127.0.0.1';
         const client = new net.Socket();
         this.connected = false;
+        this.destroyed = false;
         const ths = this;
         Connect();
         setInterval(() => {
-            if(client.destroyed) Connect();
+            if(client.destroyed && !ths.destroyed) Connect();
         }, 1000);
         this.client = client;
         function Connect() {
@@ -63,5 +66,13 @@ module.exports = class Client extends Events {
         const data = {ev, args}
         this.client.write(JSON.stringify(data) + '⋠');
         return true;
+    }
+    destroy() {
+        this.destroyed = true;
+        this.client.end();
+        this.client.destroy();
+        this.client.unref();
+        this.client.removeAllListeners();
+        this.removeAllListeners();
     }
 }
